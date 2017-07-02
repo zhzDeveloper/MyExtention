@@ -17,6 +17,7 @@
 		9D0441DA1F08DE3B00686F0C /* SourceEditorCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0441D91F08DE3B00686F0C /* SourceEditorCommand.m */; };
 		9D0441DE1F08DE3B00686F0C /* ZhzPlugin.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9D0441CE1F08DE3B00686F0C /* ZhzPlugin.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9D0441E51F08E24300686F0C /* FormatMyCodesCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0441E41F08E24300686F0C /* FormatMyCodesCommand.m */; };
+		9DD4F1CA1F09379B004FA24E /* QuickImportHCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4F1C91F09379B004FA24E /* QuickImportHCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		9D0441DB1F08DE3B00686F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D0441E31F08E24300686F0C /* FormatMyCodesCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatMyCodesCommand.h; sourceTree = "<group>"; };
 		9D0441E41F08E24300686F0C /* FormatMyCodesCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatMyCodesCommand.m; sourceTree = "<group>"; };
+		9DD4F1C81F09379B004FA24E /* QuickImportHCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickImportHCommand.h; sourceTree = "<group>"; };
+		9DD4F1C91F09379B004FA24E /* QuickImportHCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickImportHCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +146,8 @@
 				9D0441D91F08DE3B00686F0C /* SourceEditorCommand.m */,
 				9D0441E31F08E24300686F0C /* FormatMyCodesCommand.h */,
 				9D0441E41F08E24300686F0C /* FormatMyCodesCommand.m */,
+				9DD4F1C81F09379B004FA24E /* QuickImportHCommand.h */,
+				9DD4F1C91F09379B004FA24E /* QuickImportHCommand.m */,
 				9D0441DB1F08DE3B00686F0C /* Info.plist */,
 				9D0441D31F08DE3B00686F0C /* Supporting Files */,
 			);
@@ -273,6 +278,7 @@
 				9D0441D71F08DE3B00686F0C /* SourceEditorExtension.m in Sources */,
 				9D0441DA1F08DE3B00686F0C /* SourceEditorCommand.m in Sources */,
 				9D0441E51F08E24300686F0C /* FormatMyCodesCommand.m in Sources */,
+				9DD4F1CA1F09379B004FA24E /* QuickImportHCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +474,7 @@
 				9D0441C91F08DDE200686F0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9D0441DF1F08DE3B00686F0C /* Build configuration list for PBXNativeTarget "ZhzPlugin" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +483,7 @@
 				9D0441E11F08DE3B00686F0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

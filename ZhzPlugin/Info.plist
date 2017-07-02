@@ -44,6 +44,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>FormatMyCodes</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>QuickImportHCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>QuickImportHIdentifier</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>QuickImportH</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>SourceEditorExtension</string>

@@ -23,18 +23,22 @@
     completionHandler(nil);
 }
 
+//TODO : 快速导入头文件
+
 - (void)autoGendeGetter:(XCSourceEditorCommandInvocation *)invocation {
     for (NSInteger i = 0; i < invocation.buffer.selections.count; i++) {
         XCSourceTextRange *SelectedCode = invocation.buffer.selections[i];
         
         NSInteger startLine = SelectedCode.start.line;
         NSInteger endLine = SelectedCode.end.line;
+        if (startLine >= endLine) {
+            return;
+        }
         
+        //1. { 换行
         for (NSInteger n = endLine -1; n >= startLine; n--) {
             NSString *lineCode = invocation.buffer.lines[n];
             NSLog(@">>>%zd, %@", n, lineCode);
-            
-            //1. { 换行
             if ([lineCode containsString:@"{"] && [[lineCode stringByReplacingOccurrencesOfString:@" " withString:@""] hasPrefix:@"{"]) {
                 NSLog(@">>>%@", lineCode);
                 NSString *newLine = [lineCode stringByReplacingOccurrencesOfString:@"{" withString:@""];
@@ -47,14 +51,20 @@
                 NSString *newPreLineCode = [NSString stringWithFormat:@"%@ {", [preLineCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
                 [invocation.buffer.lines replaceObjectAtIndex:n-1 withObject:newPreLineCode];
             }
-            
-            //2. 属性对齐
-            
-            
-            
         }
         
-        
+        //2. 属性对齐
+       
     }
 }
+
+- (void)formatLineCodes:(NSMutableDictionary<NSNumber *, NSString *> *)propertyDict invocation:(XCSourceEditorCommandInvocation *)invocation {
+    [propertyDict enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+        [invocation.buffer.lines removeObjectAtIndex:key.integerValue];
+        
+        
+    }];
+    
+}
+
 @end
