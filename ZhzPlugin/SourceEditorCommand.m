@@ -4,7 +4,7 @@
 //
 //  Created by zhz on 2017/7/2.
 //  Copyright © 2017年 zhz. All rights reserved.
-//
+//  自动生成 getter 方法
 
 #import "SourceEditorCommand.h"
 

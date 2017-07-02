@@ -52,6 +52,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>QuickImportH</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>CheckImportHeaderCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>CheckImportHeaderIdentifier</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>CheckImportHeader</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>SourceEditorExtension</string>
