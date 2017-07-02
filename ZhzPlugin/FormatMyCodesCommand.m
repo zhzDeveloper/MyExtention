@@ -1,0 +1,60 @@
+//
+//  FormatMyCodesCommand.m
+//  MyExtention
+//
+//  Created by zhz on 2017/7/2.
+//  Copyright © 2017年 zhz. All rights reserved.
+//
+
+#import "FormatMyCodesCommand.h"
+
+@implementation FormatMyCodesCommand
+
+- (void)performCommandWithInvocation:(XCSourceEditorCommandInvocation *)invocation completionHandler:(void (^)(NSError * _Nullable nilOrError))completionHandler
+{
+    // Implement your command here, invoking the completion handler when done. Pass it nil on success, and an NSError on failure.
+    
+    NSString *identifier = invocation.commandIdentifier;
+    NSLog(@"命令: %@", identifier);
+    
+    if ([identifier isEqualToString:@"FormatMyCodesCommandIdentifier"]) {
+        [self autoGendeGetter:invocation];
+    }
+    completionHandler(nil);
+}
+
+- (void)autoGendeGetter:(XCSourceEditorCommandInvocation *)invocation {
+    for (NSInteger i = 0; i < invocation.buffer.selections.count; i++) {
+        XCSourceTextRange *SelectedCode = invocation.buffer.selections[i];
+        
+        NSInteger startLine = SelectedCode.start.line;
+        NSInteger endLine = SelectedCode.end.line;
+        
+        for (NSInteger n = endLine -1; n >= startLine; n--) {
+            NSString *lineCode = invocation.buffer.lines[n];
+            NSLog(@">>>%zd, %@", n, lineCode);
+            
+            //1. { 换行
+            if ([lineCode containsString:@"{"] && [[lineCode stringByReplacingOccurrencesOfString:@" " withString:@""] hasPrefix:@"{"]) {
+                NSLog(@">>>%@", lineCode);
+                NSString *newLine = [lineCode stringByReplacingOccurrencesOfString:@"{" withString:@""];
+                if ([[newLine stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@""].length > 0) {
+                    [invocation.buffer.lines replaceObjectAtIndex:n withObject:newLine];
+                } else {
+                    [invocation.buffer.lines removeObjectAtIndex:n];
+                }
+                NSString *preLineCode = invocation.buffer.lines[n-1];
+                NSString *newPreLineCode = [NSString stringWithFormat:@"%@ {", [preLineCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+                [invocation.buffer.lines replaceObjectAtIndex:n-1 withObject:newPreLineCode];
+            }
+            
+            //2. 属性对齐
+            
+            
+            
+        }
+        
+        
+    }
+}
+@end
