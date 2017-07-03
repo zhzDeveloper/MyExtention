@@ -48,7 +48,7 @@
                     [invocation.buffer.lines removeObjectAtIndex:n];
                 }
                 NSString *preLineCode = invocation.buffer.lines[n-1];
-                NSString *newPreLineCode = [NSString stringWithFormat:@"%@ {", [preLineCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+                NSString *newPreLineCode = newPreLineCode = [NSString stringWithFormat:@"%@ {", preLineCode];
                 [invocation.buffer.lines replaceObjectAtIndex:n-1 withObject:newPreLineCode];
             }
         }
