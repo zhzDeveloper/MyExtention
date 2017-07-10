@@ -8,12 +8,20 @@
 
 #import "SourceEditorCommand.h"
 
+static NSString *const kUIView      = @"UIView";
+static NSString *const kUITableView = @"UITableView";
+static NSString *const kUIButton    = @"UIButton";
+static NSString *const kUILabel     = @"UILabel";
+static NSString *const kUIImageView = @"UIImageView";
+
+@interface SourceEditorCommand ()
+
+@property (nonatomic, assign) NSInteger line;
+
+@end;
 @implementation SourceEditorCommand
 
-- (void)performCommandWithInvocation:(XCSourceEditorCommandInvocation *)invocation completionHandler:(void (^)(NSError * _Nullable nilOrError))completionHandler
-{
-    // Implement your command here, invoking the completion handler when done. Pass it nil on success, and an NSError on failure.
-    
+- (void)performCommandWithInvocation:(XCSourceEditorCommandInvocation *)invocation completionHandler:(void (^)(NSError * _Nullable nilOrError))completionHandler {
     NSString *identifier = invocation.commandIdentifier;
     NSLog(@"命令: %@", identifier);
     
@@ -24,20 +32,66 @@
 }
 
 - (void)autoGendeGetter:(XCSourceEditorCommandInvocation *)invocation {
-    for (NSInteger i = 0; i < invocation.buffer.lines.count; i++) {
-        NSString *lineCode = invocation.buffer.lines[i];
-        NSLog(@"%zd>> %@", i, lineCode);
-        
+    XCSourceTextRange *selectedRange = invocation.buffer.selections.lastObject;
+    NSInteger startLine = selectedRange.start.line;
+    NSInteger endLine = selectedRange.end.line;
+    if (startLine != endLine) {
+        return;
     }
+    self.line = startLine;
+    NSString *lineCode = invocation.buffer.lines[startLine];
+    NSLog(@"lineCode: %@", lineCode);
     
-    for (NSInteger i = 0; i < invocation.buffer.selections.count; i++) {
-        XCSourceTextRange *SelectedCode = invocation.buffer.selections[i];
-        NSLog(@"%zd>> %@", i, SelectedCode);
-        
+    if ([lineCode containsString:kUIView]) {
+        [self genderViewGetter:(XCSourceEditorCommandInvocation *)invocation];
+    } else if ([lineCode containsString:kUITableView]) {
+        [self genderUITableViewGetter:(XCSourceEditorCommandInvocation *)invocation];
+    } else if ([lineCode containsString:kUIButton]) {
+        [self genderUIButtonGetter:(XCSourceEditorCommandInvocation *)invocation];
+    } else if ([lineCode containsString:kUILabel]) {
+        [self genderUILabelGetter:(XCSourceEditorCommandInvocation *)invocation];
+    } else if ([lineCode containsString:kUIImageView]) {
+        [self genderUIImageViewGetter:(XCSourceEditorCommandInvocation *)invocation];
     }
+}
+
+#pragma mark - UIView
+- (void)genderViewGetter:(XCSourceEditorCommandInvocation *)invocation {
+    
     
     
 }
 
+#pragma mark - kUITableView
+- (void)genderUITableViewGetter:(XCSourceEditorCommandInvocation *)invocation {
+    
+}
+
+#pragma mark - kUIButton
+- (void)genderUIButtonGetter:(XCSourceEditorCommandInvocation *)invocation {
+    
+}
+
+#pragma mark - kUILabel
+- (void)genderUILabelGetter:(XCSourceEditorCommandInvocation *)invocation {
+    
+}
+
+#pragma mark - kUIImageView
+- (void)genderUIImageViewGetter:(XCSourceEditorCommandInvocation *)invocation {
+    
+}
+
+- (void)insertCodeToLastLine:(NSString *)code {
+    
+}
+
+- (void)objectNameWithClassName:(NSString *)className {
+    
+    [className rangeOfString:<#(nonnull NSString *)#>]
+    
+    
+    
+}
 
 @end
