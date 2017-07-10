@@ -60,6 +60,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>CheckImportHeader</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>FormatPropertyListCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>FormatPropertyListIdentifier</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>FormatPropertyList</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>SourceEditorExtension</string>

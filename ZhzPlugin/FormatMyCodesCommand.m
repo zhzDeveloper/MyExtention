@@ -10,10 +10,7 @@
 
 @implementation FormatMyCodesCommand
 
-- (void)performCommandWithInvocation:(XCSourceEditorCommandInvocation *)invocation completionHandler:(void (^)(NSError * _Nullable nilOrError))completionHandler
-{
-    // Implement your command here, invoking the completion handler when done. Pass it nil on success, and an NSError on failure.
-    
+- (void)performCommandWithInvocation:(XCSourceEditorCommandInvocation *)invocation completionHandler:(void (^)(NSError * _Nullable nilOrError))completionHandler {
     NSString *identifier = invocation.commandIdentifier;
     NSLog(@"命令: %@", identifier);
     
@@ -23,48 +20,63 @@
     completionHandler(nil);
 }
 
-//TODO : 快速导入头文件
-
 - (void)autoGendeGetter:(XCSourceEditorCommandInvocation *)invocation {
-    for (NSInteger i = 0; i < invocation.buffer.selections.count; i++) {
-        XCSourceTextRange *SelectedCode = invocation.buffer.selections[i];
-        
-        NSInteger startLine = SelectedCode.start.line;
-        NSInteger endLine = SelectedCode.end.line;
-        if (startLine >= endLine) {
-            return;
-        }
-        
-        //1. { 换行
-        for (NSInteger n = endLine -1; n >= startLine; n--) {
-            NSString *lineCode = invocation.buffer.lines[n];
-            NSLog(@">>>%zd, %@", n, lineCode);
-            if ([lineCode containsString:@"{"] && [[lineCode stringByReplacingOccurrencesOfString:@" " withString:@""] hasPrefix:@"{"]) {
-                NSLog(@">>>%@", lineCode);
-                NSString *newLine = [lineCode stringByReplacingOccurrencesOfString:@"{" withString:@""];
-                if ([[newLine stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@""].length > 0) {
-                    [invocation.buffer.lines replaceObjectAtIndex:n withObject:newLine];
-                } else {
-                    [invocation.buffer.lines removeObjectAtIndex:n];
-                }
-                NSString *preLineCode = invocation.buffer.lines[n-1];
-                NSString *newPreLineCode = newPreLineCode = [NSString stringWithFormat:@"%@ {", preLineCode];
-                [invocation.buffer.lines replaceObjectAtIndex:n-1 withObject:newPreLineCode];
-            }
-        }
-        
-        //2. 属性对齐
-       
+    if (invocation.buffer.selections.count != 1) {
+        return;
     }
+    
+    XCSourceTextRange *SelectedCode = invocation.buffer.selections.lastObject;
+    NSInteger startLine = SelectedCode.start.line;
+    NSInteger endLine = SelectedCode.end.line;
+    if (startLine >= endLine) {
+        return;
+    }
+    //1. { 换行
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    for (NSInteger n = startLine; n < endLine; n++) {
+        NSString *lineCode = invocation.buffer.lines[n];
+        NSLog(@">>>%zd, %@", n, lineCode);
+        if ([lineCode containsString:@"{"] && ![self isOnlySpaceLine:lineCode]) {
+            NSLog(@">>>%@", lineCode);
+            NSString *newLine = [lineCode stringByReplacingOccurrencesOfString:@"{" withString:@""];
+            if ([self isSpaceLine:newLine]) {
+                [indexSet addIndex:n];
+            } else {
+                [invocation.buffer.lines replaceObjectAtIndex:n withObject:newLine];
+            }
+            NSString *preLineCode = [invocation.buffer.lines[n-1] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            NSString *newPreLineCode = @"";
+            if ([self isEndWithSpace:preLineCode]) {
+                newPreLineCode = [NSString stringWithFormat:@"%@{\n", preLineCode];
+            } else {
+                newPreLineCode = [NSString stringWithFormat:@"%@ {\n", preLineCode];
+            }
+            [invocation.buffer.lines replaceObjectAtIndex:n-1 withObject:newPreLineCode];
+        } else if ([lineCode containsString:@"{"] && ![self isEndWithSpace:[lineCode stringByReplacingOccurrencesOfString:@"{\n" withString:@""]]) {
+            NSString *newLineCode = [lineCode stringByReplacingOccurrencesOfString:@"{" withString:@" {"];
+            [invocation.buffer.lines replaceObjectAtIndex:n withObject:newLineCode];
+        }
+    }
+    [invocation.buffer.lines removeObjectsAtIndexes:indexSet];
 }
 
-- (void)formatLineCodes:(NSMutableDictionary<NSNumber *, NSString *> *)propertyDict invocation:(XCSourceEditorCommandInvocation *)invocation {
-    [propertyDict enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
-        [invocation.buffer.lines removeObjectAtIndex:key.integerValue];
-        
-        
-    }];
-    
+- (BOOL)isOnlySpaceLine:(NSString *)lineCode {
+    if (lineCode.length == 0) {
+        return YES;
+    }
+    lineCode = [lineCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return lineCode.length > 1;
+}
+
+- (BOOL)isSpaceLine:(NSString *)lineCode {
+    if (lineCode.length == 0) {
+        return YES;
+    }
+    return [lineCode rangeOfString:@"\\w{1,}" options:NSRegularExpressionSearch].location == NSNotFound;
+}
+
+- (BOOL)isEndWithSpace:(NSString *)lineCode {
+    return [lineCode rangeOfString:@"\\w+\\s$" options:NSRegularExpressionSearch].location != NSNotFound;
 }
 
 @end

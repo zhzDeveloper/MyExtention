@@ -17,6 +17,7 @@
 		9D0441DA1F08DE3B00686F0C /* SourceEditorCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0441D91F08DE3B00686F0C /* SourceEditorCommand.m */; };
 		9D0441DE1F08DE3B00686F0C /* ZhzPlugin.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9D0441CE1F08DE3B00686F0C /* ZhzPlugin.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9D0441E51F08E24300686F0C /* FormatMyCodesCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0441E41F08E24300686F0C /* FormatMyCodesCommand.m */; };
+		9D1E5C8F1F0CC95400C32194 /* FormatPropertyListCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1E5C8E1F0CC95400C32194 /* FormatPropertyListCommand.m */; };
 		9DD4F1CA1F09379B004FA24E /* QuickImportHCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4F1C91F09379B004FA24E /* QuickImportHCommand.m */; };
 		9DD4F1CD1F093CEA004FA24E /* CheckImportHeaderCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4F1CC1F093CEA004FA24E /* CheckImportHeaderCommand.m */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,8 @@
 		9D0441DB1F08DE3B00686F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D0441E31F08E24300686F0C /* FormatMyCodesCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatMyCodesCommand.h; sourceTree = "<group>"; };
 		9D0441E41F08E24300686F0C /* FormatMyCodesCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatMyCodesCommand.m; sourceTree = "<group>"; };
+		9D1E5C8D1F0CC95400C32194 /* FormatPropertyListCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormatPropertyListCommand.h; sourceTree = "<group>"; };
+		9D1E5C8E1F0CC95400C32194 /* FormatPropertyListCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FormatPropertyListCommand.m; sourceTree = "<group>"; };
 		9DD4F1C81F09379B004FA24E /* QuickImportHCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickImportHCommand.h; sourceTree = "<group>"; };
 		9DD4F1C91F09379B004FA24E /* QuickImportHCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickImportHCommand.m; sourceTree = "<group>"; };
 		9DD4F1CB1F093CEA004FA24E /* CheckImportHeaderCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckImportHeaderCommand.h; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				9DD4F1C91F09379B004FA24E /* QuickImportHCommand.m */,
 				9DD4F1CB1F093CEA004FA24E /* CheckImportHeaderCommand.h */,
 				9DD4F1CC1F093CEA004FA24E /* CheckImportHeaderCommand.m */,
+				9D1E5C8D1F0CC95400C32194 /* FormatPropertyListCommand.h */,
+				9D1E5C8E1F0CC95400C32194 /* FormatPropertyListCommand.m */,
 				9D0441DB1F08DE3B00686F0C /* Info.plist */,
 				9D0441D31F08DE3B00686F0C /* Supporting Files */,
 			);
@@ -281,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D0441D71F08DE3B00686F0C /* SourceEditorExtension.m in Sources */,
+				9D1E5C8F1F0CC95400C32194 /* FormatPropertyListCommand.m in Sources */,
 				9D0441DA1F08DE3B00686F0C /* SourceEditorCommand.m in Sources */,
 				9D0441E51F08E24300686F0C /* FormatMyCodesCommand.m in Sources */,
 				9DD4F1CA1F09379B004FA24E /* QuickImportHCommand.m in Sources */,
